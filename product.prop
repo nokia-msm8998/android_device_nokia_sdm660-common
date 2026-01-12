@@ -1,6 +1,13 @@
 # eBPF
 ro.bpf.kver_override=5.10.239
 
+# adb debug
+persist.sys.usb.config=adb
+ro.adb.secure=0
+ro.debuggable=1
+ro.secure=0
+service.adb.root=1
+
 # IMS
 ro.telephony.block_binder_thread_on_incoming_calls=false
 
