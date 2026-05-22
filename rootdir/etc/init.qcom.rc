@@ -58,10 +58,6 @@ on init
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    # qseecomd needs /dev/block/bootdevice
-    # vold needs keymaster that needs qseecomd
-    start vendor.qseecomd
-
     # Disable sched autogroup
     write /proc/sys/kernel/sched_autogroup_enabled 0
 
@@ -473,6 +469,11 @@ on property:vendor.bluetooth.startbtlogger=false
 on property:vendor.media.target.version=*
     setprop vendor.sys.media.target.version ${vendor.media.target.version}
 
+service vendor.gatekeeper-1-0 /vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti
+    class early_hal
+    user system
+    group system
+
 service vendor.qrtr-ns /vendor/bin/qrtr-ns -f
     class core
     user vendor_qrtr
@@ -635,11 +636,6 @@ on property:init.svc.vendor.per_mgr=running
 
 on property:sys.shutdown.requested=*
     stop vendor.per_proxy
-
-service vendor.qseecomd /vendor/bin/qseecomd
-    class core
-    user root
-    group root
 
 service vendor.adsprpcd /vendor/bin/adsprpcd
     class main
