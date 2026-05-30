@@ -409,7 +409,7 @@ system_ext/lib64/libqcc.so|c4b25ca3ad024f62b1be6789615a1689d66ce3c8
 system_ext/lib64/libqcc_file_agent_sys.so|cd239b64ab42949c722e30d5ad500258fe3ac30a
 system_ext/lib64/vendor.qti.hardware.qccsyshal@1.0.so|99093f472cc753c0b6051c4b02c01e81ff1695ce
 system_ext/lib64/vendor.qti.hardware.qccsyshal@1.1.so|1e6bdbc4fc437186296b2d203dec61bc4eb213b6
-system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so|54eb9a32fdb1a0751a3f21e8a8f55ca9de930187
+system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so|54eb9a32fdb1a0751a3f21e8a8f55ca9de930187|60073b93b12ec8b7702cfdd9ebde763a29c14fe9
 system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2.so|ea918b3206060c3a842860c933e47743b8b62ff9
 system_ext/lib64/vendor.qti.hardware.qccvndhal@1.0.so|8990dfc61f1c88378210c88f1e51232b279527e9
 vendor/lib64/hw/vendor.qti.hardware.qccvndhal@1.0-impl.so|a7888383e44b253a4ebc4d3b2df58c9299e1745d

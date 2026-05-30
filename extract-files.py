@@ -45,6 +45,8 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace('    disabled', '    #disabled'),
     ('vendor/etc/msm_irqbalance.conf', 'vendor/etc/msm_irqbalance_sdm630.conf'): blob_fixup()
         .regex_replace('IGNORED_IRQ=19,22,39,200,203\n', 'IGNORED_IRQ=19,22,39,115,200,203,332\n'),
+    'system_ext/lib64/vendor.qti.hardware.qccsyshal@1.2-halimpl.so': blob_fixup()
+        .replace_needed('libprotobuf-cpp-full.so', 'libprotobuf-cpp-full-21.7.so'),
     'system_ext/lib64/lib-imscamera.so': blob_fixup()
         .add_needed('libgui_shim.so'),
     'system_ext/lib64/lib-imsvideocodec.so': blob_fixup()
