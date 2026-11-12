@@ -353,6 +353,10 @@ firmware_directories /vendor/firmware_mnt/image/
 /sys/class/leds/blue     delay_on     0640    system    system
 /sys/class/leds/blue     delay_off    0640    system    system
 /sys/class/leds/blue     breath       0640    system    system
+/sys/class/leds/vibrator activate     0660    system    system
+/sys/class/leds/vibrator duration     0660    system    system
+/sys/class/leds/vibrator state        0660    system    system
+/sys/class/leds/vibrator vmax_mv      0660    system    system
 
 # NPU device
 /dev/msm_npu             0644   system     system
