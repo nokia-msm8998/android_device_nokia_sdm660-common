@@ -7,6 +7,7 @@
 #define LOG_TAG "audio_amplifier"
 //#define LOG_NDEBUG 0
 
+#include <cutils/properties.h>
 #include <cutils/str_parms.h>
 #include <dlfcn.h>
 #include <hardware/audio_amplifier.h>
@@ -14,6 +15,7 @@
 #include <log/log.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 
 /* clang-format off */
@@ -55,6 +57,18 @@ static int is_speaker(uint32_t snd_device) {
     }
 
     return speaker;
+}
+
+static bool amp_use_feedback_calibration(void) {
+    char value[PROPERTY_VALUE_MAX] = {0};
+    bool calibrate;
+
+    property_get("ro.boot.smartamp", value, "");
+    calibrate = value[0] != '\0' && strcmp(value, "ti") != 0;
+    ALOGI("%s: ro.boot.smartamp='%s', calibration %s", __func__, value,
+          calibrate ? "enabled" : "skipped");
+
+    return calibrate;
 }
 
 static int tfa98xx_start_feedback(void* adev, uint32_t snd_device) {
@@ -207,7 +221,8 @@ static int amp_module_open(const hw_module_t* module, const char* name, hw_devic
     tfa_dev->amp_dev.set_parameters = NULL;
     tfa_dev->amp_dev.out_set_parameters = NULL;
     tfa_dev->amp_dev.in_set_parameters = NULL;
-    tfa_dev->amp_dev.set_feedback = amp_set_feedback;
+    tfa_dev->amp_dev.set_feedback =
+            amp_use_feedback_calibration() ? amp_set_feedback : NULL;
 
     if (hw_get_module_by_class(AUDIO_HARDWARE_MODULE_ID, AUDIO_HARDWARE_MODULE_ID_PRIMARY,
                                &tfa_dev->module_ahal)) {
